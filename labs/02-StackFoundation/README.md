@@ -161,6 +161,6 @@ Now open an Incognito browser and login into Kibana with your test user called s
 
 ## Next Steps
 
-You are ready to start with the second lab about [Elastic Stack as Fundament](../02-stackfoundation/README.md) for Elastic Security. Be aware that the trainer might have to explain the training material and provide additional instructions for a jump start.
+You are ready to start with the second lab about [Elastic Stack as Fundament](../03-AdvancedIngestion/README.md) for Elastic Security. Be aware that the trainer might have to explain the training material and provide additional instructions for a jump start.
 
 Enjoy the exercises!!!

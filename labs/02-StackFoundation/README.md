@@ -76,6 +76,54 @@ on an Administrator run-as PowerShell7 Terminal. After approx. 2 minutes the age
 
 ## Exercise 2 - Collecting data
 
+### 2.1 - Lookup which index metricbeat data is stored
+
+Here we are going to look where the `metricbeat` container stores their metrics.
+
+- Open Infrastructure under Observability.
+- Now Open Hosts. Metrics are collected from both host and containers.
+- On the top right click Settings. You can see the index pattern used.
+- Are these Elastic Agent compatible?
+
+### 2.2 - Generate some data with logstash
+
+Here we are going to look where the `logstash` container stores the data.
+
+- Open Dev Tools under Management.
+- Query for all indices `GET _cat/indices` . Look if there is a *logstash-*
+- Now execute the following
+
+```
+docker exec -it es-cluster-logstash01-1 bash
+echo "hello World" > ingest)_data/message
+exit
+```
+- now search for the index again by `GET logstash*/_search`.
+- Do you see your event? What do you recognize?
+
+### 2.3 - Import CSV data
+- Open Home.
+- Click on Add integrations.
+- Search for CSV.
+- Click Upload a file to open the window.
+- Great, let's upload our [ai_ml_cybersecurity_dataset](./content/ai_ml_cybersecurity_dataset.csv)
+- Everything seems well mapped, but we can correct things here.
+- Correct the fieldnames. Click override settings.
+    - event.id
+    - @timestamp
+    - source.ip
+    - destination.ip
+    - user_agent.original
+    - attack.type
+    - attack.severity
+    - attack.data.exfiltrated
+    - attack.info
+    - attack.response
+- Click import.
+- Ensure you have an index name like logs-import_aiml.
+- Now view and analyse this imported data set. 
+- Do the events show up in Security? Can you temporary achieve this using a Data view?
+
 
 ## Next Steps
 

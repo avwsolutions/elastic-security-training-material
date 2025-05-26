@@ -125,6 +125,40 @@ exit
 - Do the events show up in Security? Can you temporary achieve this using a Data view?
 
 
+## Exercise 3 - Setup a Teams Space
+
+### 2.1 - Create a space called secops
+
+- Open Stack Management under management.
+- Under Kibana open Spaces.
+- Click create space.
+- Add a space called *SecOps Team Space*.
+- Only allow Security.
+- Create space.
+
+### 2.2 - Create a role called team_secops
+
+- Open Stack Management under management.
+- Under Security open Users.
+- Click create role.
+- Add a role team_secops with index privileges to only .alerts-security* , security_solution-* and logs-cloud_security* data views with privileges read, write and view_index_metadata.
+- Give it access to the newly created space and all access for security features security and cases.
+- Assign role.
+- Close with create role.
+
+### 2.3 - Create a test user called secops
+
+- Open Stack Management under management.
+- Under Security open Users.
+- Click create user.
+- Add a user called secops with a secure password, Wilkomme1.
+- Give it the team_secops role.
+- Create user.
+
+### 2.4 - Test Space access
+
+Now open an Incognito browser and login into Kibana with your test user called secops.
+
 ## Next Steps
 
 You are ready to start with the second lab about [Elastic Stack as Fundament](../02-stackfoundation/README.md) for Elastic Security. Be aware that the trainer might have to explain the training material and provide additional instructions for a jump start.

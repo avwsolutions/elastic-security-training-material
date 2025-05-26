@@ -46,7 +46,7 @@ ls
 
 This exercise you will read through training setup for Elastic Security and understand the components we will use. Important to understand that Elastic Stack is built by two core components called `ElasticSearch` and `Kibana`. Data itself is stored in a `NoSQL` based DBMS as `JSON` documents. By nature `NoSQL` doesn't require a schema to start ingesting data. Additionally we will introduce `Beats` and the `Elastic Agent` to load various additional `data sets`, next to the two the `sample data sets`.
 
-<img src="https://raw.githubusercontent.com/avwsolutions/elastic-security-training-material/main/labs/01-Introduction/content/training-setup.png" alt="training-setup">
+<img src="https://github.com/avwsolutions/elastic-security-training-material/blob/main/labs/01-introduction/content/training-setup.png?raw=true" alt="training-setup">
 
 ### 3.1 - Examine the training setup components and data sets
 

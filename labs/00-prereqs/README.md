@@ -16,7 +16,15 @@ This exercise helps you to setup containerization. Most cases you will use a Con
 
 For Windows users, don't forget to setup Windows Subsystem Layer (WSL2). You can follow the instructions at [Microsoft Learn WSL Setup](https://learn.microsoft.com/en-us/windows/wsl/install-manual).
 
-Also it's good to create a *SymbolicLink* for `docker` to the `podman` executable.
+## Exercise 2 - Setup Podman Desktop
+
+Installation is really straightforward, but be aware of above notes. You may want to download the installer from [Podman.IO]](https://podman.io/). Ensure you have `Docker Compatibility` enabled.  For more installation support read the [Podman Installation Instructions](https://podman.io/docs/installation).
+
+When you join a classroom training, you are lucky, since I've already setup Podman Desktop for you.
+
+### 2.2 - Create docker Symbolic Link
+
+it's good to create a *SymbolicLink* for `docker` to the `podman` executable.
 
 For Windows using PowerShell
 
@@ -24,12 +32,6 @@ For Windows using PowerShell
 cd C:\Program files\RedHat\Podman
 New-Item -ItemType SymbolicLink -Path "docker.exe" -Target "C:\Program files\RedHat\Podman\podman.exe"
 ```
-
-## Exercise 2 - Setup Podman Desktop
-
-Installation is really straightforward, but be aware of above notes. You may want to download the installer from [Podman.IO]](https://podman.io/). Ensure you have `Docker Compatibility` enabled.  For more installation support read the [Podman Installation Instructions](https://podman.io/docs/installation).
-
-When you join a classroom training, you are lucky, since I've already setup Podman Desktop for you.
 
 ## Exercise 3 - Install supporting Tools
 

@@ -1,17 +1,15 @@
-# Cluster deployment lab exercises
+# Initial setup prerequisites
 
-Welcome to the Cluster Deployment lab exercises. During the lab exercises the student will experiential work through various tasks and activities to gain practical experience and develop new skills. In hands-on learning, attendees are given the opportunity to explore, experiment, and discover knowledge for themselves about Elastic Security.
+Welcome to the Intial setup prerequisites. During the lab exercises the student will experiential work through various tasks and activities to gain practical experience and develop new skills. In hands-on learning, attendees are given the opportunity to explore, experiment, and discover knowledge for themselves about setting up a development environment for Elastic Security.
 
 The goal is to  get actively engage and ask questions if something is not clear or you are blocked. Important to understand that there are no strong dependencies between labs, so it's okay if you're behind and follow your own pace.
 
 The following key topics are part of these exercises:
 
-- Virtualization prerequisites
-- Operating system preparation
-- Podman Installation
-- Updating default passwords
-- Managing the stack
-
+- containerization prerequisites
+- Setup Podman Desktop
+- Install supporting Tools
+  
 ## Exercise 1 - Validate your containerization prerequisites
 
 This exercise helps you to setup containerization. Most cases you will use a Container Orchestration tool, such as `Kubernetes`. Container workloads are easy to deploy, scale and provide a good way of isolating application services. During the exercises we wil use a Podman (instead of VMWare) setup. Additionally ensure that `Virtualization Technology support` is enabled in the System BIOS.
@@ -27,77 +25,53 @@ cd C:\Program files\RedHat\Podman
 New-Item -ItemType SymbolicLink -Path "docker.exe" -Target "C:\Program files\RedHat\Podman\podman.exe"
 ```
 
-### 1 - Setup Podman Desktop
+## Exercise 2 - Setup Podman Desktop
 
 Installation is really straightforward, but be aware of above notes. You may want to download the installer from [Podman.IO]](https://podman.io/). Ensure you have `Docker Compatibility` enabled.  For more installation support read the [Podman Installation Instructions](https://podman.io/docs/installation).
 
 When you join a classroom training, you are lucky, since I've already setup Podman Desktop for you.
 
-### 2.1 - Download Docker Compose Setup files with Git
+## Exercise 3 - Install supporting Tools
 
-Now that we have Podman up and running we can start downloading the `Docker Compose Setup` from a GitHub repository called [Elastic-Stack-Docker-Compose](https://github.com/avwsolutions/elastic-stack-docker-compose].
+Most excises require development skills. That's why it's good to prepare your environment with the following development tools.
 
-In the previous lab you already have setup a Git client, which you have to use now.
+- Git - SCM tool for cloning versionized repositories from Github.
+- Sysmon - Monitor system resources.
+- VS Code - Your free IDE Editor.
+- PowerShell 7 - Just better and improved for Linux.
+- PSTools - Just helpful when simulating attacks.
 
-```
-git clone https://github.com/avwsolutions/elastic-stack-docker-compose.git
-```
-
-For your convenience you can open the `elastic-stack-docker-compose` directory with `VSCode` or your favorite editor. take a look into the `docker-compose.yml` file. This is the actual setup you are going to start.
-
-## Exercise 2.2 - Start Lab Environment using Docker Compose
-
-Now that all setup files are downloaded we can start up our lab environment using `docker compose`.
-Ensure that you are in the *root* folder.
+### 3.1 - Install Git SCM
 
 ```
-cd elastic-stack-docker-compose
-docker compose up
+winget install --id=Git.Git  -e
 ```
 
-Open a second Terminal and examine if all components are running as expected.
+### 3.2 - Install Sysmon
 
 ```
-docker ps
+winget install --id=Microsoft.Sysinternals.Sysmon  -e
 ```
 
-Try to login with your favorite browser (`https://127.0.0.1:5601`) using the credentials below.
-
-Credentials are:
-- username: elastic
-- password: changeme
-
-*Tip: You can change the default password in the `.env` file*
-
-In short, let's summarize:
-- You have installed Podman Desktop.
-- You have created an Elastic Stack using a Docker Compose file.
-
-## Exercise 3 - Managing the stack
-
-This last exercise we explain some simple tricks for managing your stack. Think about start and stopping, but also troubleshooting and debugging error logs.
-
-### 5.1 - Stopping and starting environment
-
-Simply remember the following commands. Don't use `docker up / docker down` since that will reset the whole environment to default again.
+### 3.3 - Install VS Code
 
 ```
-docker compose stop
-docker compose start
+winget install --id=Microsoft.VisualStudioCode  -e
 ```
-
-### 5.2 - Troubleshooting
-
-Watch out with docker-compose down, since you have to re-change the password again due reset!
+### 3.4 - Install PowerShell 7
 
 ```
-docker compose config (check if config is OK)
-docker compose ps ( check if all container services are running)
-docker compose logs (check logs)
+winget install --id=Microsoft.PowerShell  -e
+```
+
+### 3.5 - Install PsTools
+
+```
+winget install --id=Microsoft.Sysinternals.PsTools  -e
 ```
 ## Next Steps
 
-You are ready to start with the next lab about [Advanced Ingestion tools](../03-AdvancedIngestion/README.md) in Elastic Security. Be aware that the trainer might have to explain the training material and provide additional instructions for a jump start.
+You are ready to start with the next lab about the [Introduction](../01-introduction) in Elastic Security. Be aware that the trainer might have to explain the training material and provide additional instructions for a jump start.
 
 Enjoy the exercises!!!
 

@@ -85,8 +85,8 @@ docker ps
 Try to login with your favorite browser (`https://127.0.0.1:5601`) using the credentials below.
 
 Credentials are:
-- username: elastic
-- password: changeme
+- username: `elastic`
+- password: `changeme`
 
 *Tip: You can change the default password in the `.env` file*
 

@@ -8,7 +8,6 @@ The following key topics are part of these exercises:
 
 - Setup Sysmon
 - Enable enrichment
-- Activate Threat Intelligence
 
 ## Exercise 1 - Setup Sysmon collector
 

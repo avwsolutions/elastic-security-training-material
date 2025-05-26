@@ -7,9 +7,8 @@ The goal is to  get actively engage and ask questions if something is not clear 
 The following key topics are part of these exercises:
 
 - Training resources
-- Training setup
-- Lab deployment
-- Manage the Stack
+- Training setup & deployment
+- Managing the Stack
 
 ## Exercise 1 - Downloading training resources
 

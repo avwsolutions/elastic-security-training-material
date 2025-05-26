@@ -6,103 +6,58 @@ The goal is to get actively engage and ask questions if something is not clear o
 
 The following key topics are part of these exercises:
 
-- Setup Sysmon
-- Enable enrichment
-- Activate Threat Intelligence
+- Import pre-built rules
+- Duplicate pre-built rule for customization
+- Create a Custom Query detection-rule
 
-## Exercise 1 - Setup Sysmon collector
+## Exercise 1 - Import pre-built rules
 
-This first exercise you are going to setup the Sysmon collector. This helps to generate more usable traffic.
+This first exercise you are going to import the pre-built detection-rules. 
 
-Open a PowerShell 7 Administrator run-as terminal
+You can do this by the following steps.
 
-```
-sysmon -accepteula -i content\sysmonconfig-export.xml
-```
+- Open Rules under Security
+- Click Add integrations in the top-right
+- Search for prebuilt Security
+- Click Prebuilt Security Detection Rules to open
+- Click add Prebuilt Security Detection Rules
+- Add them to your Linux-Agent-Policy
 
-Now reconfigure the Windows Integration to include Sysmon Operational.
-
-## Exercise 2 - Enable enrichment
-
-This exercise we are going to enable enrichment.
-
-### 2.1 - Add the initial asset table
+Now all latest pre-built rules are available. Now try to enable a rule called whoami.exe and try to catch an alert.
 
 ```
-PUT /assets/_doc/1?refresh=wait_for
-{
-  "name": "<your-host-name>",
-  "description": "Windows lab environment",
-  "owner": "<your-fake-name>",
-  "score": "100",
-  "unit": "training"
-}
+psexec -s powershell whoami.exe /user
+psexec -s cmd /c whoami.exe /groups 
 ```
 
-### 2.2 - Add the initial asset-policy for enrichment
+## Exercise 2 - Duplicate pre-built rule for customization
 
-```
-PUT /_enrich/policy/asset-policy
-{
-  "match": {
-    "indices": "assets",
-    "match_field": "name",
-    "enrich_fields": ["name", "description", "owner", "score" ]
-  }
-}
-```
+Try to edit the pre-built rule. This isn't possible. Best practice is to duplicate and add your company specifics to tune and ensure to reduce false positives.
 
-### 2.3 - Enable the asset-policy
+- Lookup the nping rule.
+- Click on the three dots to Duplicate rule.
+- Choose only the rule.
+- Now enable the rule.
+- Which Integration is required to catch those events?
 
-```
-POST /_enrich/policy/asset-policy/_execute?wait_for_completion=false
-```
+## Exercise 3 - Create a Custom Query detection-rule
 
-### 2.4 - Create an asset_lookup pipeline
+This exercise we are going to create a custom query detection rule. Here we are going to monitor calc.exe for educational purposes only.
 
-```
-PUT /_ingest/pipeline/asset_lookup
-{
-  "processors" : [
-    {
-      "enrich" : {
-        "description": "Lookup assets",
-        "policy_name": "asset-policy",
-        "field" : "host.name",
-        "target_field": "asset",
-        "max_matches": "1"
-      }
-    }
-  ]
-}
-```
+- Open Rules under Security
+- Click create new rule
+- Choose Custom query
+- Query is process.name : calc.exe
+- Add alert suppression using host.name.
+- Add a name Calc.exe started with description Process can harm your employees.
+- Severity is Low
+- Add a schedule of 1m/1m lookback.
+- No action for now.
 
-### 2.5 - Extend Elastic Agent Normalization with asset enrichment
-
-```
-PUT _ingest/pipeline/logs-elastic_agent@custom
-{
-  "processors": [
-    {
-      "pipeline": {
-        "name": "asset_lookup",
-        "ignore_missing_pipeline": true,
-        "tag": "enrich"
-      }
-    }
-  ]
-}
-```
-
-### 2.6 - Test enrichment and look if assets are enriched
-
-- Open Kibana console
-- Filter for host.name: specific event.
-- Look if the specific host events are enriched.
-- Try to add another asset entry to enrich.
+Now do a rule preview. Don't forget to start calc.exe to see the results.
 
 ## Next Steps
 
-You are ready to start with the second lab about [Advanced Ingestion](../03-AdvancedIngestion/README.md) for Elastic Security. Be aware that the trainer might have to explain the training material and provide additional instructions for a jump start.
+You are ready to start with the lab about [Advanced Querying](-./05-AdvancedQuerying/README.md) for Elastic Security. Be aware that the trainer might have to explain the training material and provide additional instructions for a jump start.
 
 Enjoy the exercises!!!

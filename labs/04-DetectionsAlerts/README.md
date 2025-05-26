@@ -58,6 +58,6 @@ Now do a rule preview. Don't forget to start calc.exe to see the results.
 
 ## Next Steps
 
-You are ready to start with the lab about [Advanced Querying](-./05-AdvancedQuerying/README.md) for Elastic Security. Be aware that the trainer might have to explain the training material and provide additional instructions for a jump start.
+You are ready to start with the lab about [Advanced Querying](../05-AdvancedQuerying/README.md) for Elastic Security. Be aware that the trainer might have to explain the training material and provide additional instructions for a jump start.
 
 Enjoy the exercises!!!

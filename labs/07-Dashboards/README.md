@@ -58,7 +58,7 @@ if (systemId != null) emit(systemId);
 
 Ensure that you did a rollover to activat the runtime field.
 
-- POST datstream/_rollover
+- POST datastream/_rollover
 
 ## Next Steps
 

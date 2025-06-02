@@ -1,0 +1,35 @@
+event.module : "zeek"
+event.module : "zeek" and event.category : "network" and destination.port : 443 # Result 10.89.0.215
+
+event.module: zeek and (host.ip: 10.89.0.215 and not destination.ip : "127.0.0.1" )
+
+
+event.module: zeek and (host.ip: 10.89.0.215 and not destination.ip : "127.0.0.1" ) and (destination.geo.country_iso_code :"SE" or  destination.geo.country_iso_code :"US")
+
+event.module: zeek and (host.ip: 10.89.0.215 and not destination.ip : "127.0.0.1" ) and (destination.geo.country_iso_code :"SE" or  destination.geo.country_iso_code :"US") and destination.port < 81 and not destination.ip: 96.126.98.124/32
+
+GET /logs-*/_eql/search
+{
+  "query": """
+    process where process.name == "elastic-agent.exe"
+  """,
+    "size": 10
+}
+
+GET /logs-*/_eql/search
+{
+  "query": """
+    sequence with maxspan=10ms
+      [ process where process.name == "elastic-agent.exe" ]
+      [ file where stringContains(file.name, "*.ps1") ]
+  """
+}
+
+GET /logs-*/_eql/search
+{
+  "query": """
+    sequence with maxspan=10ms
+      [ process where process.name == "elastic-agent.exe" ]
+      [ registry where stringContains(registry.key, "Microsoft") ]
+  """
+}

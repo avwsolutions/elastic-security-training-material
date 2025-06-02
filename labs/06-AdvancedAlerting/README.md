@@ -107,6 +107,6 @@ A popop will be shown to download the report. Examine the report. Also tryout th
 
 ## Next Steps
 
-You are ready to start with the lab about [Advanced Alerting](../06-AdvancedAlerting/README.md) for Elastic Security. Be aware that the trainer might have to explain the training material and provide additional instructions for a jump start.
+You are ready to start with the lab about [Dashboards](../07-Dashboards/README.md) for Elastic Security. Be aware that the trainer might have to explain the training material and provide additional instructions for a jump start.
 
 Enjoy the exercises!!!

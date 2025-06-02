@@ -147,7 +147,7 @@ Can you write down this query, which is an extend on your current query
 
 Write down the query for the documents. You should only have one document that returns.
 
-## Exercise 2 - ES|QL Queries for fun, analysing DNS and URl events
+## Exercise 2 - ES|QL Queries for fun, analysing System events and parsing with advanced workflows
 
 This exercise we are going to play around with ES|QL. We start easy, but try to include some more advanced examples. Let's start.
 
@@ -180,6 +180,9 @@ Can you try ASC and for last hour?
 
 Try out the query. Which agents are shown?
 
+- Examine the output.
+- Review the query and look if you can play around with changing the WHERE clause.
+
 ```
 FROM logs-*
 | WHERE host.name LIKE "docker*"
@@ -202,24 +205,80 @@ ROW logentry = "2025-06-02T12:15:00.000Z - ghost - 192.168.30.1"
 | KEEP @timestamp, host.name, ip.address
 ```
 
+### 2.5 - Calculate the total sessions per interface for Podman.EXE
+
+- Query must be in ES|QL.
+- Query must be piped over multiple lines for readability.
+
+Can you create a query this query from scratch?
+
+- Examine the output.
+- Review the query and look if you can change this for other processes.
+
+```
+FROM logs-*
+| WHERE process.pid IS NOT NULL
+| WHERE process.name == "podman.exe"
+| STATS total_sessions = COUNT_DISTINCT(host.ip) BY host.ip
+| KEEP total_sessions, host.ip
+```
+
 ## Exercise 3 - Use EQL to investigate a Security incident 
 
-This exercise we are going to create a custom query detection rule. Here we are going to monitor calc.exe for educational purposes only.
+This exercise you are going to use Elastic Query Language (EQL).  We are going to investigate a Security incident related to `elastic-agent.exe`. Seems to be a ambigious process.
 
-- Open Rules under Security
-- Click create new rule
-- Choose Custom query
-- Query is process.name : calc.exe
-- Add alert suppression using host.name.
-- Add a name Calc.exe started with description Process can harm your employees.
-- Severity is Low
-- Add a schedule of 1m/1m lookback.
-- No action for now.
+For this exercise you have to use `Dev Tools`.
 
-Now do a rule preview. Don't forget to start calc.exe to see the results.
+ - Open Dev Tools under Management
+
+### 3.1 - Get a list of elastic-agent.exe process events
+
+Search for all `elastic-agent.exe` process events. Additional you can minimize the total events to 10 events.
+
+```
+GET /logs-*/_eql/search
+{
+  "query": """
+    process where process.name == "elastic-agent.exe"
+  ""“,
+  “size”: 10
+}
+```
+
+### 3.2 - Get a series of ordered events executed by elastic-agent.exe
+
+Search for all `elastic-agent.exe` process events that are followed by a file events regarding `PowerShell` script executions.
+
+```
+GET /logs-*/_eql/search
+{
+  "query": """
+    sequence
+      [ process where process.name == "elastic-agent.exe" ]
+      [ file where stringContains(file.name, "*.ps1") ]
+  """
+}
+```
+
+- Examine the output.
+- Try to introduce a time-span. `sequence with maxspan=10ms`
+- Review the query and look if you can change this for registry events.
+
+## Exercise 4 - Inspect an Elastic Security panel to identify ECS dependencies
+
+Sometimes data is not showing up in Elastic Security. This can be related to data model dependencies. Try to look which query is used to populate *Uncommon processes* shown at the Hosts Overview.
+
+- Open Explore under Security.
+- Open Hosts.
+- Scroll to Uncommon processes.
+- At the top-right click the Inspect icon.
+- Copy over the Request.
+- Examine the output and find out which ECS fields are used.
+
+Try this exercise also for Network panels.
 
 ## Next Steps
 
-You are ready to start with the lab about [Advanced Querying](../05-AdvancedQuerying/README.md) for Elastic Security. Be aware that the trainer might have to explain the training material and provide additional instructions for a jump start.
+You are ready to start with the lab about [Advanced Alerting](../06-AdvancedAlerting/README.md) for Elastic Security. Be aware that the trainer might have to explain the training material and provide additional instructions for a jump start.
 
 Enjoy the exercises!!!

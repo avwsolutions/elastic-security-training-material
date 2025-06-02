@@ -62,6 +62,6 @@ Ensure that you did a rollover to activat the runtime field.
 
 ## Next Steps
 
-You are ready to start with the lab about [Advaned Investigation](../08-AdvancedInvestigation/README.md) for Elastic Security. Be aware that the trainer might have to explain the training material and provide additional instructions for a jump start.
+You are ready to start with the lab about [Advanced Investigation](../08-AdvancedInvestigation/README.md) for Elastic Security. Be aware that the trainer might have to explain the training material and provide additional instructions for a jump start.
 
 Enjoy the exercises!!!

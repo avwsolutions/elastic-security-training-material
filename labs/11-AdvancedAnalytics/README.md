@@ -67,6 +67,6 @@ Now repeat exercise 1.2. What differences do you see?
 
 ## Next Steps
 
-You are ready to start with the lab about [EDR Elastic Defend](../10-EDRDefend/README.md) for Elastic Security. Be aware that the trainer might have to explain the training material and provide additional instructions for a jump start.
+You are ready to start with the lab about [AI for Security](../11-AIforSecurity/README.md) for Elastic Security. Be aware that the trainer might have to explain the training material and provide additional instructions for a jump start.
 
 Enjoy the exercises!!!

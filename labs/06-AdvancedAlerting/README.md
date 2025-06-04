@@ -19,37 +19,49 @@ This first exercise you are going to work add a simple connector.  The following
 - Notification must be written to the server log.
 - Connector must be named triage.
 - Action severity is info.
-- Action message "You have another triage" 
+- Action message "You have another TRIAGE!" 
 
 Add this action to your calc.exe detection rule.
 
 - Go to Alerts & Insights under Stack Management
 - Click connectors
 - Create connector
-- Select server log
+- Select `server log`
 - Name it triage
 - Click save
 
-Don't forget to add this to your calc.exe detection rule under actions.
+Don't forget to add this to your calc.exe detection rule under actions and use the action message above.
 - Trigger calc.exe
-- Examine the output.
+- Examine the output. Do you spot logs in 
+
+You can use the following command.
+
+```
+docker logs es-cluster-kibana-1 | Select-String TRIAGE
+```
+
+You wil see the following line popup after an alert is created.
+
+```
+[2025-06-04T18:04:02.693+00:00][INFO ][plugins.actions.server-log] Server log: You have another TRIAGE!
+```
 
 ## Exercise 2 - Create a case by using a case template
 
 Most organizations is a good practice to work with case templates. In Elastic we can also create them.  Let's give them a try.
 
-First we have to create a case template with the following requirements.
+First we have to create a `case template` with the following requirements.
 
 - Go to Alerts & Insights under Stack Management
 - Click cases
 - Click Settings
 - Click add template
 - Name the template SOC
-- Add some useful tags like soc, edr, fun for both template and case.
-- Add yourself as assignee
+- Add some useful tags like SOC, EDR, fun for both template and case.
+- Add yourself as assignee.
 - Keep everything else default.
 
-Now open the calc.exe detection rule again and add an action to create a case based on the SOC template. Ensure that group_by is selected on `host.name`.
+Now open the calc.exe detection rule again and add an `action` to create a case based on the SOC template, you just created. Ensure that *group_by* is selected on `host.name`.
 
 ## Exercise 3 - Create a maintenance window
 
@@ -58,7 +70,7 @@ Maintenance happens and can generate False-positives. To ensure we minimise this
 - Go to Alerts & Insights under Stack Management
 - Click Maintenance Windows
 - Create Window
-- Name it Weekly Reboot.
+- Name it 'Weekly Reboot'.
 - Add you weekly schedule, every tuesday from 20:00 til 21:00
 - You can add a filter to exclude alerts like using the `kibana.alert.rule.uuid` .
 
@@ -71,8 +83,8 @@ The following requirements must be met.
 - Notification must be written to a webhook.
 - Connector must be named Fake REST API.
 - POST must go to endpoint: https://jsonplaceholder.typicode.com/posts
-- Add no authentication
-- Add a HTTP header Content-type: application/json; charset=UTF-8
+- Add no authentication.
+- Add a HTTP header `Content-type: application/json; charset=UTF-8`
 - Action severity is critical.
 - Action message must contain alert variables.
 
@@ -82,16 +94,27 @@ Add this action to your calc.exe detection rule.
 - Click connectors
 - Create connector
 - Select Webhook connector
-- Name it Fake REST API
-- Click save
+- Name it 'Fake REST API'
+- Click Save
 
-Use the test option to validate if the connectivity is setup correctly.
+Use the test option (see Test tab) to validate if the connectivity is setup correctly.
+Use the following body.
 
-Don't forget to add this to your calc.exe detection rule under actions and write a dynamic message using alert variables.
-- Trigger calc.exe
-- Examine the output. What do you see?
+```
+{
+    "title": "Hello notify",
+    "body": "Hello training",
+    "userid": 100 
+}
+```
 
-## Exercise 5 - Run an adhoc report
+- Examine the test results? Did they go well?
+
+Don't forget to add this to your calc.exe detection rule under actions and write a more dynamic message using  variables. You can use most *alert* and *context* variables, see top-right.
+
+- Trigger calc.exe to validate the action.
+
+## Exercise 5 - Create an adhoc report
 
 Still reports can be helpful. This feature is there since the beginning. Let's save the [Elastic Agent] Overview dashboard to PDF and share this with your colleagues.
 

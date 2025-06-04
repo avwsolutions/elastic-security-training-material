@@ -10,6 +10,26 @@ The following key topics are part of these exercises:
 
 ## Exercise 1 - Run scans with Trivy
 
+This exercise is to get familiar with Trivy. We will do some simple scanning of the container filesystem and look if we find any vulnerabilities, secrets or misconfigurations.
+
+First download trivy as container using docker.
+```
+docker run aquasec/trivy
+```
+
+- Download trivy as mentioned above.
+- Examine the '--help' output.
+- You can also run `docker run aquasec/trivy --version`.
+
+Now let's run the filesystem scan. This can be easily done using that container.
+
+- Execute the scan `docker run aquasec/trivy filesystem /`.
+- Examine the scan output.
+
+You can also scan a container image.
+
+- Execute the scan `docker run aquasec/trivy image nginx:latest`.
+- Examine the scan output.
 
 ## Next Steps
 

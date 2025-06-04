@@ -13,13 +13,35 @@ The following key topics are part of these exercises:
 
 ## Exercise 1 - Exploring Elastic Security features
 
-This first exercise is about understanding the way how Elastic optimizes triage. Most tools have the UI setup in a way you can go from left through the right, getting into more into evidence collection.
+This first exercise is about understanding the way how Elastic optimizes triage. Most tools have the UI setup in a way you can go from left through the right, getting more from details into evidence collection. Let's trigger a 'calc.exe' again to investigate.
+
+- Starting from an existing alert
+- Explore and investigate an user
+
+### 1.1 - Starting from alert
+
+From alert view. You may
+- Lookup alert details.
+- Investigate this further using a Timeline, first look at surrounding events.
+- We can check for correlation using EQL, like below.
+
+```
+sequence by host.name with maxspan=1h
+      [ process where process.name == "calc.exe" ]
+      [ registry where stringContains(registry.key, "Microsoft") ]
+      [ network where true]
+```
+- Add a note after first investigation like 'Seems to be a False positive, candidate for exception list' and save the timeline.
+- Don't forget to add the tag 'False Positive'.
+- Additionally it's a good practice to attach this to the existing cases that was created, using 'Attach to existing case'.
+
+### 1.2 - Starting from explore
 
 - Use Explore insights to spot anomalies in your host, network and Users behaviour.
 - On User insights, click all users
 - Select a user of choice to dive into.
 - To investigate further add the user to a timeline.
-- Analyse the surrounding events and look into alerts using the visual event analyzer.
+- Analyse the surrounding events and look into alerts using the Visual Event Analyzer.
 - Now save your timeline and add this to a new case.
 
 Give it a try. How would you approach this triage?
@@ -29,10 +51,10 @@ Give it a try. How would you approach this triage?
 This exercise you may need a free account at AbuseCH. Just create one and retrieve your personal API Key.
 
 - Open Integrations.
-- Search for AbuseCH
-- Click Add AbuseCH
-- Click on default settings and add your personal Auth Key.
-- Now deploy this integration to the Linux_Agent_Policy.
+- Search for 'AbuseCH'
+- Click Add 'AbuseCH'
+- Click on default settings and add your personal `Auth Key`.
+- Now deploy this integration to the `Linux_Agent_Policy`.
 - Open Intelligence under Security.
 
 Examine the TI data that is coming in from AbuseCH. Just enabled this.
@@ -43,8 +65,8 @@ Additional exercise is to lookup TI detection rules and enable them for all IoC 
 
 You already have seen an OSQuery container running. Here we can easily run queries.
 
-- We run queries using osqueryi
-- We schedule queries using osqueryd
+- We run queries using `osqueryi`
+- We schedule queries using `osqueryd`
 
 Now let's dive into the first exercise
 
@@ -63,7 +85,7 @@ docker exec -it es-cluster-osquery-1 bash
 ``` 
 - Now do `more osquery.conf`
 
-The following schedule is shown.
+The following schedule is shown. this is just a snippet.
 ```
  "schedule": {
     // This is a simple example query that outputs basic system information.
@@ -89,7 +111,9 @@ apt update -y
 apt install vim -y
 ```
 
-Add the following. If the container fails, then you may have issues with the syntax.
+Add the following. Ensure you apply the correct syntax and structure !
+
+If the container fails, then you may have issues with the syntax. 
 
 ```
 ,

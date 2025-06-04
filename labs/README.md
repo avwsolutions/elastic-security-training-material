@@ -19,6 +19,7 @@ If you are unable to complete certain exercises, no problem. You can always comp
 | 8   | [Advanced Investigation](08/AdvancedInvestigation/README.md) | In this lab during the exercises attendees will learn about investigation tools, like built-in from Elastic, others like OSQuery, Sysmon and using Threat Intelligence.|
 | 9   | [Cloud Security](09-CloudSecurity/README.md) | In this lab during the exercises attendees will learn about Cloud Security Posture Management and Cloud Vulnerability Management with Trivy.|
 | 10   | [EDR with Elastic Defend](10-EDRDefend/README.md) | In this lab during the exercises attendees will learn about EDR with Elastic Defend, configuring the integration, creating event lists and integrate with Microsoft Defender.|
+| 11   | [Advanced Entity Analytics](11-AdvancedAnalytics/README.md) | In this lab during the exercises attendees will learn about Advanced Entity Analytics, which uses Elastic ML and can help to calculate entity risk scores and managee your asset risk within Elastic.|
 
 ## Prerequisites
 

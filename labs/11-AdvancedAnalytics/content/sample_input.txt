@@ -1,0 +1,2 @@
+user,arnol,low_impact
+host,marvel,extreme_impact

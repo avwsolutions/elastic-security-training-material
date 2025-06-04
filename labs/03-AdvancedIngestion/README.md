@@ -68,6 +68,7 @@ PUT /_ingest/pipeline/asset_lookup
         "description": "Lookup assets",
         "policy_name": "asset-policy",
         "field" : "host.name",
+        "ignore_missing": true,
         "target_field": "asset",
         "max_matches": "1"
       }
@@ -79,7 +80,7 @@ PUT /_ingest/pipeline/asset_lookup
 ### 2.5 - Extend Elastic Agent Normalization with asset enrichment
 
 ```
-PUT _ingest/pipeline/logs-elastic_agent@custom
+PUT _ingest/pipeline/logs@custom
 {
   "processors": [
     {
